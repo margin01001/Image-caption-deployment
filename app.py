@@ -10,7 +10,6 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# received a warning for 10% allocation
 # directory for image upload
 app.config['UPLOAD_FOLDER'] = 'uploads/images'
 MAX_CAP_LEN = 40
@@ -20,10 +19,10 @@ ALLOWED_EXT = set(['png', 'jpg', 'jpeg'])
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_EXT
 
-# loading our feature extracter (vgg16)
-
+# Loading our feature extracter (vgg16)
 encoder = load_model(filepath='models/vgg16_model', compile=False)
 decoder = load_model(filepath='models/model_30_sep', compile=False)
+# Load vocabulary
 input_vocab = np.load('numpy/input_vocab.npy')
 
 def generate_cap(img_feat):
@@ -55,6 +54,7 @@ def predict(image_path):
     cap = generate_cap(img_feat)
 
     return cap
+
 @app.route('/')
 @app.route('/home')
 def home():
