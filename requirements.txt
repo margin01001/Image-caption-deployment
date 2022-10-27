@@ -5,4 +5,3 @@ tensorflow==2.8
 pillow==9.2
 numpy>=1.23.3
 protobuf==3.20.3
-gunicorn
